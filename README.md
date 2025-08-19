@@ -4,7 +4,7 @@
 
 **A beautifully crafted WordPress theme designed for visual storytelling and daily photography journals.**
 
-## ![Live Demo](https://tagebuch.huenerfuerst.de/)
+## [Live Demo](https://tagebuch.huenerfuerst.de)
 
 
 ![WordPress Theme](https://img.shields.io/badge/WordPress-Theme-blue)
