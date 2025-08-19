@@ -1,0 +1,19 @@
+body.dark-mode {
+  background: #111;
+  color: #eee;
+}
+
+body.dark-mode .site-header {
+  background: #222;
+}
+
+body.dark-mode .site-title a {
+  color: #fff;
+}
+
+body.dark-mode .polaroid {
+  background: #222;
+  border-color: #222;
+  color: #eee;
+}
+body.dark-mode { --nav-bg: #111; --text-color: #eee; }

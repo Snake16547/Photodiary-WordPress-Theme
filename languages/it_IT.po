@@ -1,0 +1,46 @@
+# Italian translation for Photodiary
+msgid ""
+msgstr ""
+"Project-Id-Version: Photodiary 1.0.0\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Toggle Dark Mode"
+msgstr "Attiva/Disattiva Modalità Scura"
+
+msgid "Toggle Navigation Menu"
+msgstr "Attiva/Disattiva Menu di Navigazione"
+
+msgid "Close Menu"
+msgstr "Chiudi Menu"
+
+msgid "Archive"
+msgstr "Archivio"
+
+msgid "Dark Mode"
+msgstr "Modalità Scura"
+
+msgid "Yesterday"
+msgstr "Ieri"
+
+msgid "Tomorrow"
+msgstr "Domani"
+
+msgid "No photos found."
+msgstr "Nessuna foto trovata."
+
+msgid "Photodiary Options"
+msgstr "Opzioni Photodiary"
+
+msgid "Enable Infinite Scroll"
+msgstr "Abilita Scorrimento Infinito"
+
+msgid "Archives"
+msgstr "Archivi"
+
+msgid "By Year"
+msgstr "Per Anno"
+
+msgid "By Month"
+msgstr "Per Mese"

@@ -1,0 +1,632 @@
+/*
+Theme Name: Photodiary
+Description: A modern daily photo blog theme with polaroid design, infinite scroll option, and dark mode. Perfect for visual storytelling and daily photography journals.
+Author: Your Name
+Version: 1.0.0
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: photodiary
+Tags: blog, photography, portfolio, responsive, polaroid, dark-mode, translation-ready
+Requires at least: 5.0
+Tested up to: 6.4
+Requires PHP: 7.4
+*/
+
+@import url("assets/css/polaroid.css");
+@import url("assets/css/darkmode.css");
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  color: #111;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header - Made Much Taller */
+.site-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 2rem 1rem;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s ease;
+  min-height: 80px;
+}
+
+/* Site Title (center) - Much Larger */
+.site-branding {
+  text-align: center;
+  flex: 1;
+}
+
+.site-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.site-title a {
+  color: #000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-title a:hover {
+  color: #666;
+}
+
+/* Hamburger Menu Button (top right) */
+.menu-toggle-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburger-line {
+  width: 25px;
+  height: 3px;
+  background: #000;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.menu-toggle-btn.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-toggle-btn.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle-btn.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Ensure hamburger menu is hidden when navigation is closed */
+.main-navigation:not(.open) ~ .menu-toggle-btn.active {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Navigation Overlay */
+.main-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  z-index: 1001;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.main-navigation.open {
+  transform: translateX(0);
+}
+
+/* Ensure proper stacking and isolation of navigation */
+.main-navigation * {
+  position: relative;
+  z-index: 1002;
+}
+
+.nav-content {
+  padding: 2rem;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.nav-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1003;
+  line-height: 1;
+}
+
+.nav-close:hover {
+  color: #ccc;
+}
+
+/* UPDATED NAVIGATION MENU STRUCTURE */
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 4rem 0 0 0;
+}
+
+.nav-menu li {
+  margin: 2rem 0;
+}
+
+/* Move Dark Mode to top and center Archive */
+.menu-item-dark-mode {
+  order: -1; /* Move to top */
+  margin: 0 0 3rem 0 !important; /* Reset margin for first item */
+}
+
+.menu-item-archive {
+  text-align: center; /* Center the archive menu */
+}
+
+.archive-trigger {
+  display: block;
+  text-align: center;
+}
+
+/* Navigation menu text styling with centering for Archive */
+.nav-menu span,
+.nav-menu button {
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+  padding: 0.5rem 0;
+  text-align: center; /* Center archive text */
+}
+
+.nav-menu span:hover,
+.nav-menu button:hover {
+  color: #ccc;
+}
+
+/* UPDATED Dark Mode Toggle in Menu - Top Left Alignment */
+.dark-mode-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start !important; /* Changed from space-between to flex-start for left alignment */
+  padding: 0.5rem 0 !important;
+  margin-top: 0 !important; /* Remove top margin since it's now first */
+  gap: 1rem; /* Add gap between label and toggle */
+}
+
+.dark-mode-menu-item .menu-label {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  order: 1; /* Label comes first */
+  text-align: left; /* Ensure left alignment */
+}
+
+.dark-mode-menu-item * {
+  box-sizing: border-box;
+}
+
+.dark-mode-menu-item *:before,
+.dark-mode-menu-item *:after {
+  box-sizing: border-box;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  order: 2; /* Toggle comes second */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.toggle-slider:after {
+  content: none !important;
+}
+
+input:checked + .toggle-slider {
+  background-color: #333;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+input:checked + .toggle-slider:after {
+  content: none !important;
+}
+
+/* Archive Dropdown */
+.archive-dropdown {
+  margin-top: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.archive-year {
+  margin: 1rem 0;
+}
+
+.year-button {
+  color: #fff !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  padding: 0.75rem 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  text-align: left;
+}
+
+.year-button:hover {
+  color: #ccc !important;
+}
+
+.archive-months {
+  display: none;
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.archive-months.open {
+  display: block;
+}
+
+.archive-months a {
+  color: #fff;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  padding: 0.5rem 0 !important;
+  border-bottom: none;
+  opacity: 0.8;
+  text-decoration: none;
+  display: block;
+}
+
+.archive-months a:hover {
+  opacity: 1;
+}
+
+/* Main Content */
+.site-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 200px);
+}
+
+/* Photo Titles - Better Centering and Sizing */
+.photo-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-align: center;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.photo-title a {
+  color: #000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: block;
+}
+
+.photo-title a:hover {
+  color: #666;
+}
+
+/* Diary Navigation Buttons - Rectangular Design */
+.diary-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3rem auto;
+  max-width: 600px;
+  gap: 1rem;
+}
+
+.diary-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+  justify-content: center;
+}
+
+.diary-nav-btn:hover {
+  background: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.diary-prev .nav-icon {
+  order: -1;
+}
+
+.diary-next .nav-icon {
+  order: 1;
+}
+
+.nav-icon {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.diary-nav-btn:hover .nav-icon {
+  transform: scale(1.1);
+}
+
+/* Pagination Styling - Same as Navigation Buttons */
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem auto;
+  gap: 1rem;
+}
+
+.navigation .nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 44px;
+  height: 44px;
+  margin: 0 2px;
+}
+
+.page-numbers:hover {
+  background: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.page-numbers.current {
+  background: #666;
+  color: #fff;
+  cursor: default;
+}
+
+.page-numbers.dots {
+  background: transparent;
+  color: #666;
+  box-shadow: none;
+  cursor: default;
+}
+
+.page-numbers.dots:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Footer */
+.site-footer {
+  background: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 4rem;
+  padding: 0;
+  transition: background-color 0.3s ease;
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Dark mode adjustments */
+body.dark-mode {
+  background: #111;
+  color: #eee;
+}
+
+body.dark-mode .site-header {
+  background: #222;
+  border-bottom-color: #444;
+}
+
+body.dark-mode .site-title a {
+  color: #fff;
+}
+
+body.dark-mode .hamburger-line {
+  background: #fff;
+}
+
+body.dark-mode .site-footer {
+  background: #1a1a1a;
+  border-top-color: #333;
+}
+
+body.dark-mode .footer-content {
+  color: #999;
+}
+
+body.dark-mode .photo-title a {
+  color: #fff;
+}
+
+body.dark-mode .photo-title a:hover {
+  color: #ccc;
+}
+
+body.dark-mode .diary-nav-btn {
+  background: #333;
+  color: #fff;
+}
+
+body.dark-mode .diary-nav-btn:hover {
+  background: #555;
+}
+
+body.dark-mode .page-numbers {
+  background: #333;
+  color: #fff;
+}
+
+body.dark-mode .page-numbers:hover {
+  background: #555;
+}
+
+body.dark-mode .page-numbers.current {
+  background: #555;
+}
+
+/* Archive Header Styling */
+.archive-header {
+  text-align: center;
+  margin: 2rem auto 3rem;
+  max-width: 600px;
+}
+
+.archive-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #000;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+body.dark-mode .archive-title {
+  color: #fff;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 1.5rem 0.75rem;
+    min-height: 60px;
+  }
+  
+  .site-title {
+    font-size: 2rem;
+  }
+  
+  .menu-toggle-btn {
+    right: 0.75rem;
+  }
+  
+  .site-branding {
+    padding-right: 60px; /* Space for hamburger menu */
+  }
+  
+  .diary-navigation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .diary-nav-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .page-numbers {
+    min-width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+    margin: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 1.25rem 0.5rem;
+  }
+  
+  .site-title {
+    font-size: 1.6rem;
+  }
+  
+  .menu-toggle-btn {
+    right: 0.5rem;
+  }
+}
