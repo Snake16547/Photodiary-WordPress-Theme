@@ -1,5 +1,9 @@
 # 📸 Photodiary - A Modern Daily Photo Blog Theme
 
+![Preview](/screenshot.png?raw=true "Day/Night Mode")
+
+https://github.com/Snake16547/Photodiary-WordPress-Theme/blob/main/screenshot.png
+
 **A beautifully crafted WordPress theme designed for visual storytelling and daily photography journals.**
 
 ![WordPress Theme](https://img.shields.io/badge/WordPress-Theme-blue)
