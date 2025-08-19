@@ -256,7 +256,7 @@ Have an idea? We'd love to hear it!
 
 ## 🔄 Changelog
 
-### Version 1.0.0 (2024-01-01)
+### Version 1.0.0 (2025-08-19)
 - **Initial release** 🎉
 - Polaroid-style photo layout
 - Dark mode toggle functionality
