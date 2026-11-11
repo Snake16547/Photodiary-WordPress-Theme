@@ -14,19 +14,11 @@ get_header();
     <?php endwhile; ?>
   </div>
 
-  <div class="navigation">
-    <?php
-    if ( get_theme_mod('photodiary_infinite_scroll', true) ) {
-      // Infinite scroll handled by JS
-    } else {
-      the_posts_pagination( array(
-        'mid_size' => 2,
-        'prev_text' => __('&laquo; Prev', 'photodiary'),
-        'next_text' => __('Next &raquo;', 'photodiary'),
-      ));
-    }
-    ?>
-  </div>
+  <?php the_posts_pagination( array(
+    'mid_size'  => 2,
+    'prev_text' => __( '&laquo; Prev', 'photodiary' ),
+    'next_text' => __( 'Next &raquo;', 'photodiary' ),
+  ) ); ?>
 <?php else : ?>
   <p><?php esc_html_e( 'No photos found.', 'photodiary' ); ?></p>
 <?php endif; ?>

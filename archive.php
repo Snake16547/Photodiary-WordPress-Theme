@@ -8,8 +8,8 @@ get_header();
 ?>
 
 <header class="archive-header">
-  <h2 class="archive-title">
-    <?php 
+  <h1 class="archive-title">
+    <?php
     // Custom archive title without prefix
     if ( is_category() ) {
       single_cat_title();
@@ -18,16 +18,16 @@ get_header();
     } elseif ( is_author() ) {
       the_author();
     } elseif ( is_year() ) {
-      echo get_the_date('Y');
+      echo esc_html( get_the_date( 'Y' ) );
     } elseif ( is_month() ) {
-      echo get_the_date('F Y');
+      echo esc_html( get_the_date( 'F Y' ) );
     } elseif ( is_day() ) {
-      echo get_the_date('F j, Y');
+      echo esc_html( get_the_date( 'F j, Y' ) );
     } else {
       the_archive_title();
     }
     ?>
-  </h2>
+  </h1>
 </header>
 
 <?php if ( have_posts() ) : ?>
@@ -37,19 +37,11 @@ get_header();
     <?php endwhile; ?>
   </div>
 
-  <div class="navigation">
-    <?php
-    if ( get_theme_mod('photodiary_infinite_scroll', true) ) {
-      // Infinite scroll handled by JS
-    } else {
-      the_posts_pagination( array(
-        'mid_size' => 2,
-        'prev_text' => __('&laquo; Prev', 'photodiary'),
-        'next_text' => __('Next &raquo;', 'photodiary'),
-      ));
-    }
-    ?>
-  </div>
+  <?php the_posts_pagination( array(
+    'mid_size'  => 2,
+    'prev_text' => __( '&laquo; Prev', 'photodiary' ),
+    'next_text' => __( 'Next &raquo;', 'photodiary' ),
+  ) ); ?>
 <?php else : ?>
   <p><?php esc_html_e( 'No photos found.', 'photodiary' ); ?></p>
 <?php endif; ?>

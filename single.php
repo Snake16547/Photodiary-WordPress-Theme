@@ -14,10 +14,10 @@ get_header();
 
   <div class="diary-navigation">
     <div class="nav-previous">
-      <?php 
+      <?php
       $prev_post = get_previous_post();
       if ($prev_post) {
-        echo '<a href="' . get_permalink($prev_post) . '" class="diary-nav-btn diary-prev">';
+        echo '<a href="' . esc_url( get_permalink( $prev_post ) ) . '" class="diary-nav-btn diary-prev">';
         echo '<span class="nav-icon">←</span>';
         echo '<span class="nav-text">' . esc_html__('Yesterday', 'photodiary') . '</span>';
         echo '</a>';
@@ -25,10 +25,10 @@ get_header();
       ?>
     </div>
     <div class="nav-next">
-      <?php 
+      <?php
       $next_post = get_next_post();
       if ($next_post) {
-        echo '<a href="' . get_permalink($next_post) . '" class="diary-nav-btn diary-next">';
+        echo '<a href="' . esc_url( get_permalink( $next_post ) ) . '" class="diary-nav-btn diary-next">';
         echo '<span class="nav-text">' . esc_html__('Tomorrow', 'photodiary') . '</span>';
         echo '<span class="nav-icon">→</span>';
         echo '</a>';
