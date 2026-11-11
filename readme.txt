@@ -5,7 +5,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 
 A responsive photo blog theme with Polaroid-style photos, year and month archives, optional infinite scrolling, and dark mode.
 
@@ -26,6 +26,9 @@ The theme saves the visitor's dark mode preference in their browser's local stor
 * Lake photo shown in screenshot.png: CC0, calfaro2005, WordPress Photo Directory. Source: https://wordpress.org/photos/photo/9736aeabd9/
 
 == Changelog ==
+
+= 1.0.2 =
+* Increased the version for WordPress.org resubmission.
 
 = 1.0.1 =
 * Added a skip link, accessible modal navigation, and visible keyboard focus.

@@ -8,7 +8,7 @@
 
 
 ![WordPress Theme](https://img.shields.io/badge/WordPress-Theme-blue)
-![Version](https://img.shields.io/badge/version-1.0.1-green)
+![Version](https://img.shields.io/badge/version-1.0.2-green)
 ![License](https://img.shields.io/badge/license-GPL%20v2+-blue)
 ![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple)
 
