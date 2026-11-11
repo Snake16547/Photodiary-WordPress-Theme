@@ -6,11 +6,25 @@
           <?php the_post_thumbnail( 'large' ); ?>
         <?php else : ?>
           <?php
-          $content = get_the_content();
-          if ( preg_match( '/<img\s[^>]*?\ssrc\s*=\s*(["\'])(.*?)\1/is', $content, $matches ) ) :
-            ?>
-            <img src="<?php echo esc_url( $matches[2] ); ?>" alt="">
-          <?php endif; ?>
+          // Shortcodes and blocks can generate the photo during content rendering.
+          $content = apply_filters( 'the_content', get_the_content() );
+          foreach ( wp_html_split( $content ) as $tag ) {
+            if ( ! preg_match( '/^<img\b/i', $tag ) ) {
+              continue;
+            }
+            // Prefer the real URL when an image optimizer supplies a placeholder.
+            foreach ( array( 'data-src', 'src' ) as $attribute ) {
+              $pattern = '/\s' . $attribute . '\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/i';
+              if ( preg_match( $pattern, $tag, $matches ) ) {
+                $url = html_entity_decode( $matches[1] ?: ( $matches[2] ?? '' ) ?: ( $matches[3] ?? '' ), ENT_QUOTES, 'UTF-8' );
+                if ( esc_url( $url ) ) {
+                  echo '<img src="' . esc_url( $url ) . '" alt="" loading="lazy">';
+                  break 2;
+                }
+              }
+            }
+          }
+          ?>
         <?php endif; ?>
       <?php endif; ?>
 

@@ -2,7 +2,7 @@
 Theme Name: Photodiary
 Description: A modern daily photo blog theme with polaroid design, infinite scroll option, and dark mode. Perfect for visual storytelling and daily photography journals.
 Author: Nils Hünerfürst
-Version: 1.0.2
+Version: 1.0.3
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: photodiary
@@ -672,4 +672,17 @@ body.dark-mode .archive-title {
     min-width: 0;
     padding: 0.75rem;
   }
+}
+
+.framed-entry-content {
+  min-width: 0;
+}
+
+.framed-entry-content figure {
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.framed-entry-content img {
+  max-width: 100%;
 }
