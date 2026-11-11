@@ -4,88 +4,56 @@ document.addEventListener("DOMContentLoaded", function () {
   const navigation = document.getElementById("site-navigation");
   const navClose = document.getElementById("nav-close");
 
-  // Close menu function
-  function closeMenu() {
-    if (navigation && menuToggle) {
-      navigation.classList.remove("open");
-      menuToggle.classList.remove("active");
-      menuToggle.setAttribute("aria-expanded", "false");
-      navigation.setAttribute("aria-hidden", "true");
-    }
+  if (!navigation || typeof navigation.showModal !== "function" || !menuToggle || !navClose) {
+    return;
   }
 
-  // Dark mode toggle
+  menuToggle.hidden = false;
+  menuToggle.addEventListener("click", () => {
+    navigation.showModal();
+    menuToggle.setAttribute("aria-expanded", "true");
+  });
+
+  navClose.addEventListener("click", () => navigation.close());
+  navigation.addEventListener("close", () => {
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.focus();
+  });
+
+  navigation.addEventListener("keydown", (event) => {
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const controls = Array.from(navigation.querySelectorAll("button, input, summary, details[open] a[href]"))
+      .filter((element) => !element.disabled && element.getClientRects().length);
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
   if (toggle) {
-    // Prevent the toggle from creating additional elements
-    toggle.addEventListener("click", function(e) {
-      e.stopPropagation();
-    });
-    
+    try {
+      toggle.checked = localStorage.getItem("photodiary-darkmode") === "on";
+      document.body.classList.toggle("dark-mode", toggle.checked);
+    } catch (error) {
+      // The toggle still works when browser storage is unavailable.
+    }
+
     toggle.addEventListener("change", () => {
-      if (toggle.checked) {
-        document.body.classList.add("dark-mode");
-        localStorage.setItem("photodiary-darkmode", "on");
-      } else {
-        document.body.classList.remove("dark-mode");
-        localStorage.setItem("photodiary-darkmode", "off");
-      }
-      
-      // Close menu after toggling dark mode to prevent visual conflicts
-      setTimeout(() => {
-        closeMenu();
-      }, 300);
-    });
-
-    // Load saved preference
-    if (localStorage.getItem("photodiary-darkmode") === "on") {
-      document.body.classList.add("dark-mode");
-      toggle.checked = true;
-    }
-  }
-
-  // Mobile menu toggle
-  if (menuToggle && navigation) {
-    menuToggle.addEventListener("click", (e) => {
-      e.preventDefault();
-      navigation.classList.add("open");
-      menuToggle.classList.add("active");
-      menuToggle.setAttribute("aria-expanded", "true");
-      navigation.setAttribute("aria-hidden", "false");
-    });
-  }
-
-  // Close button
-  if (navClose) {
-    navClose.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeMenu();
-    });
-  }
-
-  // Close menu when clicking outside
-  if (navigation) {
-    navigation.addEventListener("click", (e) => {
-      if (e.target === navigation) {
-        closeMenu();
+      document.body.classList.toggle("dark-mode", toggle.checked);
+      try {
+        localStorage.setItem("photodiary-darkmode", toggle.checked ? "on" : "off");
+      } catch (error) {
+        // Apply the preference for this page even if it cannot be saved.
       }
     });
   }
-
-  // Close menu on escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && navigation && navigation.classList.contains("open")) {
-      closeMenu();
-    }
-  });
-
-  // Archive year toggle functionality
-  document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('year-button')) {
-      const year = e.target.dataset.year;
-      const monthsDiv = document.getElementById('months-' + year);
-      if (monthsDiv) {
-        monthsDiv.classList.toggle('open');
-      }
-    }
-  });
 });

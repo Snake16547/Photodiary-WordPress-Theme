@@ -1,6 +1,6 @@
 # 📸 Photodiary - A Modern Daily Photo Blog Theme
 
-![Preview](/screenshot.png "Day/Night Mode")
+![Preview](/screenshot.png)
 
 **A beautifully crafted WordPress theme designed for visual storytelling and daily photography journals.**
 
@@ -8,7 +8,7 @@
 
 
 ![WordPress Theme](https://img.shields.io/badge/WordPress-Theme-blue)
-![Version](https://img.shields.io/badge/version-1.0.0-green)
+![Version](https://img.shields.io/badge/version-1.0.1-green)
 ![License](https://img.shields.io/badge/license-GPL%20v2+-blue)
 ![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple)
 
@@ -48,7 +48,7 @@
 
 ## 📋 Requirements
 
-- **WordPress:** 5.0 or higher
+- **WordPress:** 5.8 or higher
 - **PHP:** 7.4 or higher  
 - **Browser Support:** Modern browsers (Chrome, Firefox, Safari, Edge)
 
@@ -223,7 +223,7 @@ We welcome contributions! Here's how you can help:
 - Follow [WordPress PHP Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/)
 - Use semantic HTML5 elements
 - Ensure accessibility compliance (WCAG 2.1)
-- Test with WordPress 5.0+ and PHP 7.4+
+- Test with WordPress 5.8+ and PHP 7.4+
 
 ## 🐛 Issues & Support
 

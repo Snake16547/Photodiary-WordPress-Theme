@@ -5,7 +5,9 @@
   transition: box-shadow 0.2s ease, transform 0.2s ease;
   border-radius: 2px;
   margin: 2rem auto;
-  max-width: 600px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 656px;
   border: 12px solid #fff; /* equal border all sides */
   display: flex;
   flex-direction: column;
